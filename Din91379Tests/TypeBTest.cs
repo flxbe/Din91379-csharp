@@ -63,5 +63,10 @@ public class TypeBTest
         {
             yield return new object[] { glyph };
         }
+
+        foreach (string glyph in Glyphs.NonLettersE1)
+        {
+            yield return new object[] { glyph };
+        }
     }
 }

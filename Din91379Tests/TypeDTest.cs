@@ -1,16 +1,15 @@
 namespace Din91379Tests;
 
-using System.Text;
 using Din91379;
 
 
-public class TypeATest
+public class TypeDTest
 {
     [Theory]
     [MemberData(nameof(ValidGlyphsTestData))]
     public void TestAcceptsAllValidGlyphs(string glyph)
     {
-        Assert.True(TypeA.IsValid(glyph));
+        Assert.True(TypeD.IsValid(glyph));
     }
 
     public static IEnumerable<object[]> ValidGlyphsTestData()
@@ -24,33 +23,13 @@ public class TypeATest
         {
             yield return new object[] { validGlyph };
         }
-    }
 
-    [Theory]
-    [MemberData(nameof(InvalidGlyphsTestData))]
-    public void TestRejectsInvalidGlyphs(string glyph)
-    {
-        Assert.False(TypeA.IsValid(glyph));
-    }
-
-    public static IEnumerable<object[]> InvalidGlyphsTestData()
-    {
-        foreach (string glyph in Data.GloballyInvalidStrings)
+        foreach (string validGlyph in Glyphs.NonLettersN2)
         {
-            yield return new object[] { glyph };
-        }
-
-        foreach (string glyph in Glyphs.NonLettersN2)
-        {
-            yield return new object[] { glyph };
+            yield return new object[] { validGlyph };
         }
 
         foreach (string glyph in Glyphs.NonLettersN3)
-        {
-            yield return new object[] { glyph };
-        }
-
-        foreach (string glyph in Glyphs.NonLettersN4)
         {
             yield return new object[] { glyph };
         }
@@ -60,12 +39,32 @@ public class TypeATest
             yield return new object[] { glyph };
         }
 
-        foreach (string glyph in Glyphs.CyrillicLetters)
+        foreach (string glyph in Glyphs.NonLettersE1)
+        {
+            yield return new object[] { glyph };
+        }
+    }
+
+    [Theory]
+    [MemberData(nameof(InvalidGlyphsTestData))]
+    public void TestRejectsInvalidGlyphs(string glyph)
+    {
+        Assert.False(TypeD.IsValid(glyph));
+    }
+
+    public static IEnumerable<object[]> InvalidGlyphsTestData()
+    {
+        foreach (string glyph in Data.GloballyInvalidStrings)
         {
             yield return new object[] { glyph };
         }
 
-        foreach (string glyph in Glyphs.NonLettersE1)
+        foreach (string glyph in Glyphs.NonLettersN4)
+        {
+            yield return new object[] { glyph };
+        }
+
+        foreach (string glyph in Glyphs.CyrillicLetters)
         {
             yield return new object[] { glyph };
         }
