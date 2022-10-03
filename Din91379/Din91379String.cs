@@ -33,7 +33,7 @@ namespace Din91379
     }
 
 
-    public abstract class Din91379String
+    public abstract class Din91379String : IComparable<Din91379String>, IComparable<string>
     {
         readonly protected string value;
 
@@ -42,18 +42,38 @@ namespace Din91379
             this.value = value;
         }
 
-        public static implicit operator string(Din91379String d)
-        {
-            return d.value;
-
-        }
-
         protected static void AssertIsNormalized(string value)
         {
             if (!System.StringNormalizationExtensions.IsNormalized(value))
             {
                 throw new InvalidUnicodeNormalization(value);
             }
+        }
+
+        public int CompareTo(Din91379String? other)
+        {
+            if (other is null)
+            {
+                return this.value.CompareTo(null);
+            }
+            else
+            {
+                return this.value.CompareTo(other.value);
+            }
+        }
+        public int CompareTo(string? other)
+        {
+            return this.value.CompareTo(other);
+        }
+
+        public static string operator +(Din91379String left, string right)
+        {
+            return left.value + right;
+        }
+
+        public static string operator +(string left, Din91379String right)
+        {
+            return left + right.value;
         }
     }
 }

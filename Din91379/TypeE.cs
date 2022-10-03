@@ -11,7 +11,7 @@ namespace Din91379
         {
             AssertIsNormalized(value);
 
-            string invalidGlyph = GetInvalidGlyph(value);
+            string? invalidGlyph = GetInvalidGlyph(value);
             if (invalidGlyph != null)
             {
                 throw new InvalidGlyphException(value, invalidGlyph);
@@ -33,7 +33,7 @@ namespace Din91379
             }
         }
 
-        private static string GetInvalidGlyph(string value)
+        private static string? GetInvalidGlyph(string value)
         {
             foreach (string glyph in Glyphs.GetGlyphEnumerator(value))
             {
