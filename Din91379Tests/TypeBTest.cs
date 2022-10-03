@@ -1,16 +1,15 @@
 namespace Din91379Tests;
 
-using System.Text;
 using Din91379;
 
 
-public class TypeATest
+public class TypeBTest
 {
     [Theory]
     [MemberData(nameof(ValidGlyphsTestData))]
     public void TestAcceptsAllValidGlyphs(string glyph)
     {
-        Assert.True(TypeA.IsValid(glyph));
+        Assert.True(TypeB.IsValid(glyph));
     }
 
     public static IEnumerable<object[]> ValidGlyphsTestData()
@@ -24,23 +23,23 @@ public class TypeATest
         {
             yield return new object[] { validGlyph };
         }
+
+        foreach (string validGlyph in Glyphs.NonLettersN2)
+        {
+            yield return new object[] { validGlyph };
+        }
     }
 
     [Theory]
     [MemberData(nameof(InvalidGlyphsTestData))]
     public void TestRejectsInvalidGlyphs(string glyph)
     {
-        Assert.False(TypeA.IsValid(glyph));
+        Assert.False(TypeB.IsValid(glyph));
     }
 
     public static IEnumerable<object[]> InvalidGlyphsTestData()
     {
         foreach (string glyph in Data.GloballyInvalidStrings)
-        {
-            yield return new object[] { glyph };
-        }
-
-        foreach (string glyph in Glyphs.NonLettersN2)
         {
             yield return new object[] { glyph };
         }

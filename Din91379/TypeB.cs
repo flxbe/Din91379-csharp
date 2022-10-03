@@ -1,13 +1,13 @@
 ﻿
 namespace Din91379
 {
-    public class TypeA : Din91379String
+    public class TypeB : Din91379String
     {
-        private TypeA(string value) : base(value)
+        private TypeB(string value) : base(value)
         {
         }
 
-        public static TypeA FromString(string value)
+        public static TypeB FromString(string value)
         {
             AssertIsNormalized(value);
 
@@ -17,15 +17,14 @@ namespace Din91379
                 throw new InvalidGlyphException(value, invalidGlyph);
             }
 
-            return new TypeA(value);
+            return new TypeB(value);
         }
-
 
         public static bool IsValid(string value)
         {
             try
             {
-                TypeA.FromString(value);
+                TypeB.FromString(value);
                 return true;
             }
             catch (InvalidGlyphException)
@@ -44,6 +43,11 @@ namespace Din91379
                 }
 
                 if (Glyphs.NonLettersN1.Contains(glyph))
+                {
+                    continue;
+                }
+
+                if (Glyphs.NonLettersN2.Contains(glyph))
                 {
                     continue;
                 }

@@ -1,13 +1,13 @@
 ﻿
 namespace Din91379
 {
-    public class TypeA : Din91379String
+    public class TypeC : Din91379String
     {
-        private TypeA(string value) : base(value)
+        private TypeC(string value) : base(value)
         {
         }
 
-        public static TypeA FromString(string value)
+        public static TypeC FromString(string value)
         {
             AssertIsNormalized(value);
 
@@ -17,7 +17,7 @@ namespace Din91379
                 throw new InvalidGlyphException(value, invalidGlyph);
             }
 
-            return new TypeA(value);
+            return new TypeC(value);
         }
 
 
@@ -25,7 +25,7 @@ namespace Din91379
         {
             try
             {
-                TypeA.FromString(value);
+                TypeC.FromString(value);
                 return true;
             }
             catch (InvalidGlyphException)
@@ -33,6 +33,7 @@ namespace Din91379
                 return false;
             }
         }
+
 
         private static string GetInvalidGlyph(string value)
         {
@@ -44,6 +45,21 @@ namespace Din91379
                 }
 
                 if (Glyphs.NonLettersN1.Contains(glyph))
+                {
+                    continue;
+                }
+
+                if (Glyphs.NonLettersN2.Contains(glyph))
+                {
+                    continue;
+                }
+
+                if (Glyphs.NonLettersN3.Contains(glyph))
+                {
+                    continue;
+                }
+
+                if (Glyphs.NonLettersN4.Contains(glyph))
                 {
                     continue;
                 }
