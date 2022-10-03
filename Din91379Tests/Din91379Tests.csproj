@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DinSpec91379\DinSpec91379.csproj" />
+    <ProjectReference Include="..\Din91379\Din91379.csproj" />
   </ItemGroup>
 
 </Project>

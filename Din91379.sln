@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DinSpec91379", "DinSpec91379\DinSpec91379.csproj", "{C30A0E37-5F64-4526-B6F9-404FCBB90D79}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Din91379", "Din91379\Din91379.csproj", "{C30A0E37-5F64-4526-B6F9-404FCBB90D79}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DinSpec91379Tests", "DinSpec91379Tests\DinSpec91379Tests.csproj", "{9AF7BF8C-A176-4831-9329-5F341D932926}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Din91379Tests", "Din91379Tests\Din91379Tests.csproj", "{9AF7BF8C-A176-4831-9329-5F341D932926}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

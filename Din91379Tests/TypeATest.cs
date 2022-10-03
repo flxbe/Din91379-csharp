@@ -1,6 +1,6 @@
-namespace DinSpec91379Tests;
+namespace Din91379Tests;
 
-using DinSpec91379;
+using Din91379;
 
 
 public class UnitTest1
