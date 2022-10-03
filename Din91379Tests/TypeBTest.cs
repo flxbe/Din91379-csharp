@@ -44,6 +44,11 @@ public class TypeBTest
             yield return new object[] { glyph };
         }
 
+        foreach (string glyph in Glyphs.DeprecatedLatinLetters.Keys)
+        {
+            yield return new object[] { glyph };
+        }
+
         foreach (string glyph in Glyphs.NonLettersN3)
         {
             yield return new object[] { glyph };

@@ -189,8 +189,6 @@ namespace Din91379
             "ļ",
             "Ľ",
             "ľ",
-            "Ŀ",
-            "ŀ",
             "Ł",
             "ł",
             "Ń",
@@ -199,7 +197,6 @@ namespace Din91379
             "ņ",
             "Ň",
             "ň",
-            "ŉ",
             "Ŋ",
             "ŋ",
             "Ō",
@@ -658,7 +655,17 @@ namespace Din91379
             "Ụ̈",
             "ụ̄",
             "ụ̈",
-            };
+        };
+
+        public static readonly Dictionary<string, string> DeprecatedLatinLetters = new Dictionary<string, string> {
+            {"ē̍", "ī́"},
+            {"Ŀ", "L·"},
+            {"ŀ", "l·"},
+            {"ŉ", "'n"},
+            {"ō̍", "ṓ"},
+            {"ḗ", "ī́"},
+        };
+
 
         public static readonly HashSet<string> NonLettersN1 = new HashSet<string> {
             " ",
