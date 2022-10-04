@@ -1,4 +1,4 @@
-# DIN 91379
+# Din91379-csharp
 
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/flxbe/Din91379/blob/main/LICENSE)
 [![ci](https://github.com/flxbe/Din91379/actions/workflows/CI.yml/badge.svg)](https://github.com/flxbe/Din91379/actions/workflows/CI.yml)
