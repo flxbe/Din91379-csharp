@@ -10,10 +10,14 @@ public class TypeCTest
     public void TestAcceptsAllValidGlyphs(string glyph)
     {
         Assert.True(TypeC.IsValid(glyph));
+
+        Assert.Equal(glyph, TypeC.FromString(glyph));
     }
 
     public static IEnumerable<object[]> ValidGlyphsTestData()
     {
+        yield return new object[] { "" };
+
         foreach (string validGlyph in Glyphs.LatinLetters)
         {
             yield return new object[] { validGlyph };
@@ -41,36 +45,15 @@ public class TypeCTest
     }
 
     [Theory]
-    [MemberData(nameof(DeprecatedGlyphsTestData))]
-    public void TestTranslatesDeprecatedGlyphs(string glyph, string replacement)
+    [MemberData(nameof(NotConvertibleTestData))]
+    public void TestRejectsNotConvertibleGlyphs(string glyph)
     {
-        TypeC value = TypeC.FromString(glyph);
-        Assert.Equal(value, replacement);
+        Assert.Throws<InvalidGlyphException>(() => TypeC.FromString(glyph));
     }
 
-    public static IEnumerable<object[]> DeprecatedGlyphsTestData()
-    {
-        foreach (KeyValuePair<string, string> item in Glyphs.DeprecatedLatinLetters)
-        {
-            yield return new object[] { item.Key, item.Value };
-        }
-    }
-
-    [Theory]
-    [MemberData(nameof(InvalidGlyphsTestData))]
-    public void TestRejectsInvalidGlyphs(string glyph)
-    {
-        Assert.False(TypeC.IsValid(glyph));
-    }
-
-    public static IEnumerable<object[]> InvalidGlyphsTestData()
+    public static IEnumerable<object[]> NotConvertibleTestData()
     {
         foreach (string glyph in Data.GloballyInvalidStrings)
-        {
-            yield return new object[] { glyph };
-        }
-
-        foreach (string glyph in Glyphs.DeprecatedLatinLetters.Keys)
         {
             yield return new object[] { glyph };
         }
@@ -86,6 +69,26 @@ public class TypeCTest
         }
 
         foreach (string glyph in Glyphs.NonLettersE1)
+        {
+            yield return new object[] { glyph };
+        }
+    }
+
+    [Theory]
+    [MemberData(nameof(InvalidGlyphsTestData))]
+    public void TestRejectsInvalidGlyphs(string glyph)
+    {
+        Assert.False(TypeC.IsValid(glyph));
+    }
+
+    public static IEnumerable<object[]> InvalidGlyphsTestData()
+    {
+        foreach (object[] data in NotConvertibleTestData())
+        {
+            yield return data;
+        }
+
+        foreach (string glyph in Glyphs.DeprecatedLatinLetters.Keys)
         {
             yield return new object[] { glyph };
         }

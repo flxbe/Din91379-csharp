@@ -10,10 +10,14 @@ public class TypeETest
     public void TestAcceptsAllValidGlyphs(string glyph)
     {
         Assert.True(TypeE.IsValid(glyph));
+
+        Assert.Equal(glyph, TypeE.FromString(glyph));
     }
 
     public static IEnumerable<object[]> ValidGlyphsTestData()
     {
+        yield return new object[] { "" };
+
         foreach (string validGlyph in Glyphs.LatinLetters)
         {
             yield return new object[] { validGlyph };
@@ -56,18 +60,17 @@ public class TypeETest
     }
 
     [Theory]
-    [MemberData(nameof(DeprecatedGlyphsTestData))]
-    public void TestTranslatesDeprecatedGlyphs(string glyph, string replacement)
+    [MemberData(nameof(NotConvertibleTestData))]
+    public void TestRejectsNotConvertibleGlyphs(string glyph)
     {
-        TypeE value = TypeE.FromString(glyph);
-        Assert.Equal(value, replacement);
+        Assert.Throws<InvalidGlyphException>(() => TypeE.FromString(glyph));
     }
 
-    public static IEnumerable<object[]> DeprecatedGlyphsTestData()
+    public static IEnumerable<object[]> NotConvertibleTestData()
     {
-        foreach (KeyValuePair<string, string> item in Glyphs.DeprecatedLatinLetters)
+        foreach (string glyph in Data.GloballyInvalidStrings)
         {
-            yield return new object[] { item.Key, item.Value };
+            yield return new object[] { glyph };
         }
     }
 
@@ -80,9 +83,9 @@ public class TypeETest
 
     public static IEnumerable<object[]> InvalidGlyphsTestData()
     {
-        foreach (string glyph in Data.GloballyInvalidStrings)
+        foreach (object[] data in NotConvertibleTestData())
         {
-            yield return new object[] { glyph };
+            yield return data;
         }
 
         foreach (string glyph in Glyphs.DeprecatedLatinLetters.Keys)

@@ -10,10 +10,14 @@ public class TypeDTest
     public void TestAcceptsAllValidGlyphs(string glyph)
     {
         Assert.True(TypeD.IsValid(glyph));
+
+        Assert.Equal(glyph, TypeD.FromString(glyph));
     }
 
     public static IEnumerable<object[]> ValidGlyphsTestData()
     {
+        yield return new object[] { "" };
+
         foreach (string validGlyph in Glyphs.LatinLetters)
         {
             yield return new object[] { validGlyph };
@@ -46,18 +50,27 @@ public class TypeDTest
     }
 
     [Theory]
-    [MemberData(nameof(DeprecatedGlyphsTestData))]
-    public void TestTranslatesDeprecatedGlyphs(string glyph, string replacement)
+    [MemberData(nameof(NotConvertibleTestData))]
+    public void TestRejectsNotConvertibleGlyphs(string glyph)
     {
-        TypeD value = TypeD.FromString(glyph);
-        Assert.Equal(value, replacement);
+        Assert.Throws<InvalidGlyphException>(() => TypeD.FromString(glyph));
     }
 
-    public static IEnumerable<object[]> DeprecatedGlyphsTestData()
+    public static IEnumerable<object[]> NotConvertibleTestData()
     {
-        foreach (KeyValuePair<string, string> item in Glyphs.DeprecatedLatinLetters)
+        foreach (string glyph in Data.GloballyInvalidStrings)
         {
-            yield return new object[] { item.Key, item.Value };
+            yield return new object[] { glyph };
+        }
+
+        foreach (string glyph in Glyphs.NonLettersN4)
+        {
+            yield return new object[] { glyph };
+        }
+
+        foreach (string glyph in Glyphs.CyrillicLetters)
+        {
+            yield return new object[] { glyph };
         }
     }
 
@@ -70,22 +83,12 @@ public class TypeDTest
 
     public static IEnumerable<object[]> InvalidGlyphsTestData()
     {
-        foreach (string glyph in Data.GloballyInvalidStrings)
+        foreach (object[] data in NotConvertibleTestData())
         {
-            yield return new object[] { glyph };
+            yield return data;
         }
 
         foreach (string glyph in Glyphs.DeprecatedLatinLetters.Keys)
-        {
-            yield return new object[] { glyph };
-        }
-
-        foreach (string glyph in Glyphs.NonLettersN4)
-        {
-            yield return new object[] { glyph };
-        }
-
-        foreach (string glyph in Glyphs.CyrillicLetters)
         {
             yield return new object[] { glyph };
         }

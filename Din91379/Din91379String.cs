@@ -9,7 +9,6 @@ namespace Din91379
     public abstract class Din91379Exception : System.Exception
     {
         public Din91379Exception(string message) : base(message) { }
-
     }
 
     public class InvalidGlyphException : Din91379Exception
@@ -22,18 +21,6 @@ namespace Din91379
             this.value = value;
             this.invalidGlyph = invalidGlyph;
         }
-
-    }
-
-    public class InvalidUnicodeNormalization : Din91379Exception
-    {
-        readonly string value;
-
-        public InvalidUnicodeNormalization(string value) : base(String.Format("The string is not Unicode NFC normalized: '{0}'", value))
-        {
-            this.value = value;
-        }
-
     }
 
     public abstract class Din91379String : IComparable<Din91379String>, IComparable<string>,
@@ -88,6 +75,11 @@ namespace Din91379
 
         protected static bool _IsValid(string value, HashSet<string> validGlyphs)
         {
+            if (!value.IsNormalized())
+            {
+                return false;
+            }
+
             return _GetFirstInvalidGlyph(value, validGlyphs) == null;
         }
 
