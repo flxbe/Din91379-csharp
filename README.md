@@ -4,3 +4,13 @@
 [![ci](https://github.com/flxbe/Din91379/actions/workflows/CI.yml/badge.svg)](https://github.com/flxbe/Din91379/actions/workflows/CI.yml)
 
 A C# implementation of [DIN 91379:2022-08](https://www.beuth.de/de/norm/din-91379/353496133).
+
+- **Strict**: All data types are Unicode NFC normalized and contain only
+  non-deprecated glyphs as defined in DIN 91379. Any string containing invalid
+  glyphs is rejected when trying to construct any of the data types.
+
+- **Flexible**: When constructing any of the data types, the
+  string is correctly normalized and deprecated glyphs are converted to their
+  corresponding replacement automatically. In addition, static methods for checking
+  and converting strings are available without the need to actually construct any of
+  the data types.

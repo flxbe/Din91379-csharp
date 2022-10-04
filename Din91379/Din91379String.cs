@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 
 namespace Din91379
@@ -8,6 +9,7 @@ namespace Din91379
         public Din91379Exception(string message) : base(message) { }
 
     }
+
     public class InvalidGlyphException : Din91379Exception
     {
         readonly string value;
@@ -32,7 +34,6 @@ namespace Din91379
 
     }
 
-
     public abstract class Din91379String : IComparable<Din91379String>, IComparable<string>
     {
         readonly protected string value;
@@ -42,13 +43,42 @@ namespace Din91379
             this.value = value;
         }
 
-        protected static void AssertIsNormalized(string value)
+        protected static string _ConvertAndCheck(string value, HashSet<string> validGlyphs)
         {
             if (!System.StringNormalizationExtensions.IsNormalized(value))
             {
                 throw new InvalidUnicodeNormalization(value);
             }
+
+            string? invalidGlyph = _GetFirstInvalidGlyph(value, validGlyphs);
+            if (invalidGlyph != null)
+            {
+                throw new InvalidGlyphException(value, invalidGlyph);
+            }
+
+            // TODO: translate deprecated glyphs
+
+            return value;
         }
+
+        protected static string? _GetFirstInvalidGlyph(string value, HashSet<string> validGlyphs)
+        {
+            foreach (string glyph in Glyphs.GetGlyphEnumerator(value))
+            {
+                if (!validGlyphs.Contains(glyph))
+                {
+                    return glyph;
+                }
+            }
+
+            return null;
+        }
+
+        protected static bool _IsValid(string value, HashSet<string> validGlyphs)
+        {
+            return _GetFirstInvalidGlyph(value, validGlyphs) == null;
+        }
+
 
         public int CompareTo(Din91379String? other)
         {

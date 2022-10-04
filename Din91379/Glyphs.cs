@@ -6,12 +6,12 @@ namespace Din91379
 {
     public class Glyphs
     {
-        public static readonly HashSet<string> LongLatinLetterStarts = new HashSet<string> {
+        public static readonly string[] LongLatinLetterStarts = {
             "K͟",
             "k͟",
         };
 
-        public static readonly HashSet<string> LatinLetters = new HashSet<string> {
+        public static readonly string[] LatinLetters = {
             "A",
             "B",
             "C",
@@ -657,17 +657,9 @@ namespace Din91379
             "ụ̈",
         };
 
-        public static readonly Dictionary<string, string> DeprecatedLatinLetters = new Dictionary<string, string> {
-            {"ē̍", "ī́"},
-            {"Ŀ", "L·"},
-            {"ŀ", "l·"},
-            {"ŉ", "'n"},
-            {"ō̍", "ṓ"},
-            {"ḗ", "ī́"},
-        };
 
 
-        public static readonly HashSet<string> NonLettersN1 = new HashSet<string> {
+        public static readonly string[] NonLettersN1 = {
             " ",
             "'",
             ",",
@@ -688,7 +680,7 @@ namespace Din91379
             "‡",
         };
 
-        public static readonly HashSet<string> NonLettersN2 = new HashSet<string> {
+        public static readonly string[] NonLettersN2 = {
             "!",
             "\"",
             "#",
@@ -751,7 +743,7 @@ namespace Din91379
             "€",
         };
 
-        public static readonly HashSet<string> NonLettersN3 = new HashSet<string> {
+        public static readonly string[] NonLettersN3 = {
             "¤",
             "¦",
             "¸",
@@ -760,14 +752,14 @@ namespace Din91379
             "¾",
         };
 
-        public static readonly HashSet<string> NonLettersN4 = new HashSet<string> {
+        public static readonly string[] NonLettersN4 = {
             char.ConvertFromUtf32(0x0009), // CHARACTER TABULATION
             char.ConvertFromUtf32(0x000A), // LINE FEED (LF)
             char.ConvertFromUtf32(0x000D), // CARRIAGE RETURN (CR)
             char.ConvertFromUtf32(0x00A0), // NO-BREAK BACKSPACE
         };
 
-        public static readonly HashSet<string> GreekLetters = new HashSet<string> {
+        public static readonly string[] GreekLetters = {
             "Ά",
             "Έ",
             "Ή",
@@ -839,7 +831,7 @@ namespace Din91379
             "ώ",
         };
 
-        public static readonly HashSet<string> CyrillicLetters = new HashSet<string>{
+        public static readonly string[] CyrillicLetters = {
             "Ѝ",
             "А",
             "Б",
@@ -904,7 +896,7 @@ namespace Din91379
             "ѝ",
         };
 
-        public static readonly HashSet<string> NonLettersE1 = new HashSet<string> {
+        public static readonly string[] NonLettersE1 = {
             "ƒ",
             "ʰ",
             "ʳ",
@@ -949,6 +941,15 @@ namespace Din91379
             "≥",
         };
 
+        public static readonly Dictionary<string, string> DeprecatedLatinLetters = new Dictionary<string, string> {
+            {"ē̍", "ī́"},
+            {"Ŀ", "L·"},
+            {"ŀ", "l·"},
+            {"ŉ", "'n"},
+            {"ō̍", "ṓ"},
+            {"ḗ", "ī́"},
+        };
+
         public static IEnumerable<string> GetGlyphEnumerator(string value)
         {
             TextElementEnumerator glyphEnumerator = StringInfo.GetTextElementEnumerator(value);
@@ -971,6 +972,18 @@ namespace Din91379
                 yield return glyph;
 
             }
+        }
+
+        public static HashSet<string> CreateGlyphSet(string[][] validGlyphArrays)
+        {
+            HashSet<string> validGlyphs = new HashSet<string>();
+
+            foreach (string[] validGlyphArray in validGlyphArrays)
+            {
+                validGlyphs.UnionWith(validGlyphArray);
+            }
+
+            return validGlyphs;
         }
     }
 }

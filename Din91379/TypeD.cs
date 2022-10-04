@@ -1,76 +1,36 @@
-﻿
+﻿using System.Collections.Generic;
+
 namespace Din91379
 {
     public class TypeD : Din91379String
     {
+        private static readonly HashSet<string> ValidGlyphs = Glyphs.CreateGlyphSet(new string[][] {
+            Glyphs.LatinLetters,
+            Glyphs.NonLettersN1,
+            Glyphs.NonLettersN2,
+            Glyphs.NonLettersN3,
+            Glyphs.GreekLetters,
+            Glyphs.NonLettersE1,
+        });
+
         private TypeD(string value) : base(value)
         {
         }
 
         public static TypeD FromString(string value)
         {
-            AssertIsNormalized(value);
-
-            string? invalidGlyph = GetInvalidGlyph(value);
-            if (invalidGlyph != null)
-            {
-                throw new InvalidGlyphException(value, invalidGlyph);
-            }
-
+            value = _ConvertAndCheck(value, ValidGlyphs);
             return new TypeD(value);
         }
 
         public static bool IsValid(string value)
         {
-            try
-            {
-                TypeD.FromString(value);
-                return true;
-            }
-            catch (InvalidGlyphException)
-            {
-                return false;
-            }
+            return _IsValid(value, ValidGlyphs);
         }
 
-        private static string? GetInvalidGlyph(string value)
+        public static string? GetFirstInvalidGlyph(string value)
         {
-            foreach (string glyph in Glyphs.GetGlyphEnumerator(value))
-            {
-                if (Glyphs.LatinLetters.Contains(glyph))
-                {
-                    continue;
-                }
-
-                if (Glyphs.NonLettersN1.Contains(glyph))
-                {
-                    continue;
-                }
-
-                if (Glyphs.NonLettersN2.Contains(glyph))
-                {
-                    continue;
-                }
-
-                if (Glyphs.NonLettersN3.Contains(glyph))
-                {
-                    continue;
-                }
-
-                if (Glyphs.GreekLetters.Contains(glyph))
-                {
-                    continue;
-                }
-
-                if (Glyphs.NonLettersE1.Contains(glyph))
-                {
-                    continue;
-                }
-
-                return glyph;
-            }
-
-            return null;
+            return _GetFirstInvalidGlyph(value, ValidGlyphs);
         }
     }
 }

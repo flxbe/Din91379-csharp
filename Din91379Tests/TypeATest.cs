@@ -1,6 +1,5 @@
 namespace Din91379Tests;
 
-using System.Text;
 using Din91379;
 
 

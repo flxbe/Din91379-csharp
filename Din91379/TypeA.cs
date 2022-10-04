@@ -1,57 +1,32 @@
-﻿
+﻿using System.Collections.Generic;
+
 namespace Din91379
 {
     public class TypeA : Din91379String
     {
+        private static readonly HashSet<string> ValidGlyphs = Glyphs.CreateGlyphSet(new string[][] {
+            Glyphs.LatinLetters,
+            Glyphs.NonLettersN1,
+        });
+
         private TypeA(string value) : base(value)
         {
         }
 
         public static TypeA FromString(string value)
         {
-            AssertIsNormalized(value);
-
-            string? invalidGlyph = GetInvalidGlyph(value);
-            if (invalidGlyph != null)
-            {
-                throw new InvalidGlyphException(value, invalidGlyph);
-            }
-
+            value = _ConvertAndCheck(value, ValidGlyphs);
             return new TypeA(value);
         }
 
-
         public static bool IsValid(string value)
         {
-            try
-            {
-                TypeA.FromString(value);
-                return true;
-            }
-            catch (InvalidGlyphException)
-            {
-                return false;
-            }
+            return _IsValid(value, ValidGlyphs);
         }
 
-        private static string? GetInvalidGlyph(string value)
+        public static string? GetFirstInvalidGlyph(string value)
         {
-            foreach (string glyph in Glyphs.GetGlyphEnumerator(value))
-            {
-                if (Glyphs.LatinLetters.Contains(glyph))
-                {
-                    continue;
-                }
-
-                if (Glyphs.NonLettersN1.Contains(glyph))
-                {
-                    continue;
-                }
-
-                return glyph;
-            }
-
-            return null;
+            return _GetFirstInvalidGlyph(value, ValidGlyphs);
         }
 
         public static TypeA operator +(TypeA left, TypeA right)
