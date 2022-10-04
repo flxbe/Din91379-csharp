@@ -36,7 +36,8 @@ namespace Din91379
 
     }
 
-    public abstract class Din91379String : IComparable<Din91379String>, IComparable<string>, IEnumerable<char>, IEnumerable, IEquatable<string>, IEquatable<Din91379String>
+    public abstract class Din91379String : IComparable<Din91379String>, IComparable<string>,
+        IEnumerable<char>, IEnumerable, IEquatable<string>, IEquatable<Din91379String>
     {
         readonly protected string value;
 
@@ -114,24 +115,14 @@ namespace Din91379
             }
             else
             {
-                return a.value == b;
+                return a.value.Equals(b);
             }
         }
 
-        public static bool operator !=(Din91379String? a, string? b)
-        {
-            return !(a == b);
-        }
+        public static bool operator !=(Din91379String? a, string? b) => !(a == b);
 
-        public static bool operator ==(string? a, Din91379String? b)
-        {
-            return b == a;
-        }
-
-        public static bool operator !=(string? a, Din91379String? b)
-        {
-            return b != a;
-        }
+        public static bool operator ==(string? a, Din91379String? b) => b == a;
+        public static bool operator !=(string? a, Din91379String? b) => b != a;
 
         public static bool operator ==(Din91379String? a, Din91379String? b)
         {
@@ -141,15 +132,11 @@ namespace Din91379
             }
             else
             {
-                return a.value == b;
+                return a.Equals(b);
             }
         }
 
-        public static bool operator !=(Din91379String? a, Din91379String? b)
-        {
-            return !(a == b);
-        }
-
+        public static bool operator !=(Din91379String? a, Din91379String? b) => !(a == b);
 
         public static string operator +(Din91379String left, string right)
         {
@@ -186,14 +173,20 @@ namespace Din91379
             return String.GetHashCode(value);
         }
 
-        public bool Equals(string? other)
-        {
-            return this.value == other;
-        }
+        public override bool Equals(object? other) => this.Equals(other as string);
+        public bool Equals(string? other) => this.value == other;
 
         public bool Equals(Din91379String? other)
         {
-            return this == other;
+            if (other is null)
+            {
+                return false;
+            }
+
+            return this.value.Equals(other.value);
         }
+
+        public override string ToString() => this.value;
+        public static implicit operator string(Din91379String d) => d.value;
     }
 }

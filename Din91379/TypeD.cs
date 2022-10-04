@@ -2,7 +2,7 @@
 
 namespace Din91379
 {
-    public class TypeD : Din91379String
+    public sealed class TypeD : Din91379String
     {
         private static readonly HashSet<string> ValidGlyphs = Glyphs.CreateGlyphSet(new string[][] {
             Glyphs.LatinLetters,
