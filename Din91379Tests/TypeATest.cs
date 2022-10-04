@@ -26,6 +26,22 @@ public class TypeATest
     }
 
     [Theory]
+    [MemberData(nameof(DeprecatedGlyphsTestData))]
+    public void TestTranslatesDeprecatedGlyphs(string glyph, string replacement)
+    {
+        TypeA value = TypeA.FromString(glyph);
+        Assert.Equal(value, replacement);
+    }
+
+    public static IEnumerable<object[]> DeprecatedGlyphsTestData()
+    {
+        foreach (KeyValuePair<string, string> item in Glyphs.DeprecatedLatinLetters)
+        {
+            yield return new object[] { item.Key, item.Value };
+        }
+    }
+
+    [Theory]
     [MemberData(nameof(InvalidGlyphsTestData))]
     public void TestRejectsInvalidGlyphs(string glyph)
     {
