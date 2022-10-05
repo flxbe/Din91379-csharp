@@ -4,8 +4,8 @@ namespace Din91379
 {
     public sealed class TypeC : Din91379String
     {
-        private static readonly HashSet<string> ValidGlyphs = Glyphs.CreateGlyphSet(new string[][] {
-            Glyphs.LatinLetters,
+        private static readonly HashSet<string> ValidGlyphs = Glyphs.CreateGlyphSet(new IEnumerable<string>[] {
+            Glyphs.LatinLetters.Keys,
             Glyphs.NonLettersN1,
             Glyphs.NonLettersN2,
             Glyphs.NonLettersN3,
@@ -14,6 +14,11 @@ namespace Din91379
 
         private TypeC(string value) : base(value)
         {
+        }
+
+        public string GetSearchForm()
+        {
+            return _GetSearchForm();
         }
 
         public static TypeC FromString(string value)

@@ -33,6 +33,29 @@ namespace Din91379
             this.value = value;
         }
 
+        protected string _GetSearchForm()
+        {
+            StringBuilder builder = new StringBuilder(this.value.Length);
+            foreach (string glyph in Glyphs.GetGlyphEnumerator(this.value))
+            {
+                // Latin letters are transliterated according to the table in
+                // https://www.xoev.de/sixcms/media.php/13/StringLatin%2012.zip
+                if (Glyphs.LatinLetters.ContainsKey(glyph))
+                {
+                    builder.Append(Glyphs.LatinLetters[glyph]);
+                }
+                // Non-letter transliterations as defined in
+                // https://xoev.de/latinchars/1_1/supplement/identverfahren.pdf
+                else
+                {
+                    // Only use transliteration if available
+                    builder.Append(Glyphs.NonLetterTransliterations.GetValueOrDefault(glyph, glyph));
+                }
+            }
+
+            return builder.ToString();
+        }
+
         protected static string _ConvertAndCheck(string value, HashSet<string> validGlyphs)
         {
             value = value.Normalize();

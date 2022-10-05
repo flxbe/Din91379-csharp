@@ -4,13 +4,18 @@ namespace Din91379
 {
     public sealed class TypeA : Din91379String
     {
-        private static readonly HashSet<string> ValidGlyphs = Glyphs.CreateGlyphSet(new string[][] {
-            Glyphs.LatinLetters,
+        private static readonly HashSet<string> ValidGlyphs = Glyphs.CreateGlyphSet(new IEnumerable<string>[] {
+            Glyphs.LatinLetters.Keys,
             Glyphs.NonLettersN1,
         });
 
         private TypeA(string value) : base(value)
         {
+        }
+
+        public string GetSearchForm()
+        {
+            return _GetSearchForm();
         }
 
         public static TypeA FromString(string value)
@@ -28,6 +33,7 @@ namespace Din91379
         {
             return _GetFirstInvalidGlyph(value, ValidGlyphs);
         }
+
 
         public static TypeA operator +(TypeA left, TypeA right)
         {

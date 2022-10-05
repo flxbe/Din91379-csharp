@@ -18,7 +18,7 @@ public class TypeATest
     {
         yield return new object[] { "" };
 
-        foreach (string validGlyph in Glyphs.LatinLetters)
+        foreach (string validGlyph in Glyphs.LatinLetters.Keys)
         {
             yield return new object[] { validGlyph };
         }

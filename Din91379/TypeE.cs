@@ -4,8 +4,8 @@ namespace Din91379
 {
     public sealed class TypeE : Din91379String
     {
-        private static readonly HashSet<string> ValidGlyphs = Glyphs.CreateGlyphSet(new string[][] {
-            Glyphs.LatinLetters,
+        private static readonly HashSet<string> ValidGlyphs = Glyphs.CreateGlyphSet(new IEnumerable<string>[] {
+            Glyphs.LatinLetters.Keys,
             Glyphs.NonLettersN1,
             Glyphs.NonLettersN2,
             Glyphs.NonLettersN3,
