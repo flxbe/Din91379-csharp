@@ -4,6 +4,8 @@ namespace Din91379Tests;
 
 class TestData
 {
+    public static readonly LatinChars Groups = LatinChars.Load();
+
     public static readonly string[] GloballyInvalidStrings = {
         "K͟",
         "K͟u",

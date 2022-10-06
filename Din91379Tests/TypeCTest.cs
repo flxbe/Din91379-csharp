@@ -5,8 +5,6 @@ using Din91379;
 
 public class TypeCTest
 {
-    private static readonly LatinChars LatinCharsData = LatinChars.Load();
-
     [Theory]
     [MemberData(nameof(ValidGlyphsTestData))]
     public void TestAcceptsAllValidGlyphs(string glyph)
@@ -20,27 +18,27 @@ public class TypeCTest
     {
         yield return new object[] { "" };
 
-        foreach (string validGlyph in LatinCharsData.LatinLetters.Keys)
+        foreach (string validGlyph in TestData.Groups.LatinLetters.Keys)
         {
             yield return new object[] { validGlyph };
         }
 
-        foreach (string validGlyph in LatinCharsData.NonLettersN1.Keys)
+        foreach (string validGlyph in TestData.Groups.NonLettersN1.Keys)
         {
             yield return new object[] { validGlyph };
         }
 
-        foreach (string validGlyph in LatinCharsData.NonLettersN2.Keys)
+        foreach (string validGlyph in TestData.Groups.NonLettersN2.Keys)
         {
             yield return new object[] { validGlyph };
         }
 
-        foreach (string glyph in LatinCharsData.NonLettersN3.Keys)
+        foreach (string glyph in TestData.Groups.NonLettersN3.Keys)
         {
             yield return new object[] { glyph };
         }
 
-        foreach (string glyph in LatinCharsData.NonLettersN4.Keys)
+        foreach (string glyph in TestData.Groups.NonLettersN4.Keys)
         {
             yield return new object[] { glyph };
         }
@@ -60,17 +58,17 @@ public class TypeCTest
             yield return new object[] { glyph };
         }
 
-        foreach (string glyph in LatinCharsData.GreekLetters)
+        foreach (string glyph in TestData.Groups.GreekLetters)
         {
             yield return new object[] { glyph };
         }
 
-        foreach (string glyph in LatinCharsData.CyrillicLetters)
+        foreach (string glyph in TestData.Groups.CyrillicLetters)
         {
             yield return new object[] { glyph };
         }
 
-        foreach (string glyph in LatinCharsData.NonLettersE1)
+        foreach (string glyph in TestData.Groups.NonLettersE1)
         {
             yield return new object[] { glyph };
         }

@@ -5,8 +5,6 @@ using Din91379;
 
 public class SearchFormTest
 {
-    private static readonly LatinChars LatinCharsData = LatinChars.Load();
-
     [Theory]
     [MemberData(nameof(TypeASearchFormTestData))]
     public void TestTypeASearchForm(string original, string expected)
@@ -25,12 +23,12 @@ public class SearchFormTest
         yield return new object[] { "Nœl Schmidt-Strauß", "NOEL SCHMIDT-STRAUSS" };
         yield return new object[] { "Noël Schmidt-Strauß", "NOEL SCHMIDT-STRAUSS" };
 
-        foreach (KeyValuePair<string, string> item in LatinCharsData.LatinLetters)
+        foreach (KeyValuePair<string, string> item in TestData.Groups.LatinLetters)
         {
             yield return new object[] { item.Key, item.Value };
         }
 
-        foreach (KeyValuePair<string, string> item in LatinCharsData.NonLettersN1)
+        foreach (KeyValuePair<string, string> item in TestData.Groups.NonLettersN1)
         {
             yield return new object[] { item.Key, item.Value };
         }
@@ -57,7 +55,7 @@ public class SearchFormTest
             yield return item;
         }
 
-        foreach (KeyValuePair<string, string> item in LatinCharsData.NonLettersN2)
+        foreach (KeyValuePair<string, string> item in TestData.Groups.NonLettersN2)
         {
             yield return new object[] { item.Key, item.Value };
         }
@@ -79,12 +77,12 @@ public class SearchFormTest
             yield return item;
         }
 
-        foreach (KeyValuePair<string, string> item in LatinCharsData.NonLettersN3)
+        foreach (KeyValuePair<string, string> item in TestData.Groups.NonLettersN3)
         {
             yield return new object[] { item.Key, item.Value };
         }
 
-        foreach (KeyValuePair<string, string> item in LatinCharsData.NonLettersN4)
+        foreach (KeyValuePair<string, string> item in TestData.Groups.NonLettersN4)
         {
             yield return new object[] { item.Key, item.Value };
         }
