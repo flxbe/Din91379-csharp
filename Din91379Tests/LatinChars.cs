@@ -42,6 +42,10 @@ class LatinChars
         {
             ImportNode(node);
         }
+
+        // Add new, non-deprecated NonLetterE1 glyphs
+        this.NonLettersE1.Add("′");
+        this.NonLettersE1.Add("″");
     }
 
     public static LatinChars Load()
