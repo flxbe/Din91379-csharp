@@ -43,6 +43,16 @@ class LatinChars
             ImportNode(node);
         }
 
+        // Check, that all glyphs have been loaded
+        _CheckGlyphCount(this.LatinLetters.Count, 646 - ExcludedSamples.GetLength(0));
+        _CheckGlyphCount(this.NonLettersN1.Count, 18);
+        _CheckGlyphCount(this.NonLettersN2.Count, 60);
+        _CheckGlyphCount(this.NonLettersN3.Count, 6);
+        _CheckGlyphCount(this.NonLettersN4.Count, 4);
+        _CheckGlyphCount(this.GreekLetters.Count, 69);
+        _CheckGlyphCount(this.CyrillicLetters.Count, 62);
+        _CheckGlyphCount(this.NonLettersE1.Count, 40);
+
         // Add new, non-deprecated NonLetterE1 glyphs
         this.NonLettersE1.Add("′");
         this.NonLettersE1.Add("″");
@@ -98,6 +108,14 @@ class LatinChars
         }
     }
 
+
+    private static void _CheckGlyphCount(int actual, int expected)
+    {
+        if (actual != expected)
+        {
+            throw new Exception("Wrong glyph count");
+        }
+    }
 }
 
 class CharacterInfo
@@ -185,4 +203,5 @@ class CharacterInfo
 
         return attribute.Value;
     }
+
 }
