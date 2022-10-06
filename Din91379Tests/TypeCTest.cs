@@ -5,6 +5,8 @@ using Din91379;
 
 public class TypeCTest
 {
+    private static readonly LatinChars LatinCharsData = LatinChars.Load();
+
     [Theory]
     [MemberData(nameof(ValidGlyphsTestData))]
     public void TestAcceptsAllValidGlyphs(string glyph)
@@ -18,27 +20,27 @@ public class TypeCTest
     {
         yield return new object[] { "" };
 
-        foreach (string validGlyph in Glyphs.LatinLetters.Keys)
+        foreach (string validGlyph in LatinCharsData.LatinLetters.Keys)
         {
             yield return new object[] { validGlyph };
         }
 
-        foreach (string validGlyph in Glyphs.NonLettersN1)
+        foreach (string validGlyph in LatinCharsData.NonLettersN1.Keys)
         {
             yield return new object[] { validGlyph };
         }
 
-        foreach (string validGlyph in Glyphs.NonLettersN2)
+        foreach (string validGlyph in LatinCharsData.NonLettersN2.Keys)
         {
             yield return new object[] { validGlyph };
         }
 
-        foreach (string glyph in Glyphs.NonLettersN3)
+        foreach (string glyph in LatinCharsData.NonLettersN3.Keys)
         {
             yield return new object[] { glyph };
         }
 
-        foreach (string glyph in Glyphs.NonLettersN4)
+        foreach (string glyph in LatinCharsData.NonLettersN4.Keys)
         {
             yield return new object[] { glyph };
         }
@@ -53,22 +55,22 @@ public class TypeCTest
 
     public static IEnumerable<object[]> NotConvertibleTestData()
     {
-        foreach (string glyph in Data.GloballyInvalidStrings)
+        foreach (string glyph in TestData.GloballyInvalidStrings)
         {
             yield return new object[] { glyph };
         }
 
-        foreach (string glyph in Glyphs.GreekLetters)
+        foreach (string glyph in LatinCharsData.GreekLetters)
         {
             yield return new object[] { glyph };
         }
 
-        foreach (string glyph in Glyphs.CyrillicLetters)
+        foreach (string glyph in LatinCharsData.CyrillicLetters)
         {
             yield return new object[] { glyph };
         }
 
-        foreach (string glyph in Glyphs.NonLettersE1)
+        foreach (string glyph in LatinCharsData.NonLettersE1)
         {
             yield return new object[] { glyph };
         }
@@ -88,7 +90,7 @@ public class TypeCTest
             yield return data;
         }
 
-        foreach (string glyph in Glyphs.DeprecatedLatinLetters.Keys)
+        foreach (string glyph in TestData.DeprecatedLatinLetters.Keys)
         {
             yield return new object[] { glyph };
         }

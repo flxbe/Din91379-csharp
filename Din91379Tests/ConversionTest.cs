@@ -47,7 +47,7 @@ public class ConversionTest
 
     public static IEnumerable<object[]> DeprecatedGlyphsTestData()
     {
-        foreach (KeyValuePair<string, string> item in Glyphs.DeprecatedLatinLetters)
+        foreach (KeyValuePair<string, string> item in TestData.DeprecatedLatinLetters)
         {
             yield return new object[] { item.Key, item.Value };
         }

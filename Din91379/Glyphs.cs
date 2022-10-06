@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Din91379
 {
-    public class Glyphs
+    class Glyphs
     {
         public static readonly string[] LongLatinLetterStarts = {
             "K͟",
