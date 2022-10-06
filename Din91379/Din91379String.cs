@@ -6,6 +6,7 @@ using System.Text;
 
 namespace Din91379
 {
+
     public abstract class Din91379Exception : System.Exception
     {
         public Din91379Exception(string message) : base(message) { }
@@ -26,6 +27,8 @@ namespace Din91379
     public abstract class Din91379String : IComparable<Din91379String>, IComparable<string>,
         IEnumerable<char>, IEnumerable, IEquatable<string>, IEquatable<Din91379String>
     {
+        private static readonly Dictionary<string, string> TransliterationTable = Glyphs.CreateTransliterationTable();
+
         readonly protected string value;
 
         protected Din91379String(string value)
@@ -38,19 +41,7 @@ namespace Din91379
             StringBuilder builder = new StringBuilder(this.value.Length);
             foreach (string glyph in Glyphs.GetGlyphEnumerator(this.value))
             {
-                // Latin letters are transliterated according to the table in
-                // https://www.xoev.de/sixcms/media.php/13/StringLatin%2012.zip
-                if (Glyphs.LatinLetters.ContainsKey(glyph))
-                {
-                    builder.Append(Glyphs.LatinLetters[glyph]);
-                }
-                // Non-letter transliterations as defined in
-                // https://xoev.de/latinchars/1_1/supplement/identverfahren.pdf
-                else
-                {
-                    // Only use transliteration if available
-                    builder.Append(Glyphs.NonLetterTransliterations.GetValueOrDefault(glyph, glyph));
-                }
+                builder.Append(TransliterationTable[glyph]);
             }
 
             return builder.ToString();

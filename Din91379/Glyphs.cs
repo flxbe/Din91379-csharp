@@ -749,16 +749,25 @@ namespace Din91379
             "¾",
         };
 
-        public static readonly Dictionary<string, string> NonLetterTransliterations = new Dictionary<string, string> {
-            {"ª", "A"},
-            {"º", "O"},
-        };
-
         public static readonly string[] NonLettersN4 = {
             char.ConvertFromUtf32(0x0009), // CHARACTER TABULATION
             char.ConvertFromUtf32(0x000A), // LINE FEED (LF)
             char.ConvertFromUtf32(0x000D), // CARRIAGE RETURN (CR)
             char.ConvertFromUtf32(0x00A0), // NO-BREAK BACKSPACE
+        };
+
+        public static readonly Dictionary<string, string> NonLetterTransliterations = new Dictionary<string, string> {
+            {"ª", "A"},
+            {"º", "O"},
+            {"ˈ", ""},
+            {"’", ""},
+            {"ʹ", ""},
+            {"ʾ", ""},
+            {"ˌ", ""},
+            {"ʿ", ""},
+            {"‡", ""},
+            {"ʺ", ""},
+            {char.ConvertFromUtf32(0x00A0), ""}, // NO-BREAK BACKSPACE
         };
 
         public static readonly string[] GreekLetters = {
@@ -915,8 +924,8 @@ namespace Din91379
             "†",
             "…",
             "‰",
-            "′",
-            "″",
+            // "′",
+            // "″",
             "‹",
             "›",
             "⁰",
@@ -972,7 +981,6 @@ namespace Din91379
                 }
 
                 yield return glyph;
-
             }
         }
 
@@ -986,6 +994,38 @@ namespace Din91379
             }
 
             return validGlyphs;
+        }
+
+        public static Dictionary<string, string> CreateTransliterationTable()
+        {
+            Dictionary<string, string> table = new Dictionary<string, string>(LatinLetters);
+
+            foreach (string glyph in NonLettersN1)
+            {
+                // By default, non-letters are mapped to themselves.
+                string searchForm = NonLetterTransliterations.GetValueOrDefault(glyph, glyph);
+                table.Add(glyph, searchForm);
+            }
+
+            foreach (string glyph in NonLettersN2)
+            {
+                string searchForm = NonLetterTransliterations.GetValueOrDefault(glyph, glyph);
+                table.Add(glyph, searchForm);
+            }
+
+            foreach (string glyph in NonLettersN3)
+            {
+                string searchForm = NonLetterTransliterations.GetValueOrDefault(glyph, glyph);
+                table.Add(glyph, searchForm);
+            }
+
+            foreach (string glyph in NonLettersN4)
+            {
+                string searchForm = NonLetterTransliterations.GetValueOrDefault(glyph, glyph);
+                table.Add(glyph, searchForm);
+            }
+
+            return table;
         }
     }
 }
