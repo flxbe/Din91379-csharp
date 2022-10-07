@@ -75,11 +75,6 @@ namespace Din91379
 
         protected static bool _IsValid(string value, HashSet<string> validGlyphs)
         {
-            if (!value.IsNormalized())
-            {
-                return false;
-            }
-
             return _GetFirstInvalidGlyph(value, validGlyphs) == null;
         }
 

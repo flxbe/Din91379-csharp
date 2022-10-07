@@ -52,7 +52,6 @@ class LatinChars
         this.LatinLetters.Add("ō̍", "O");
         this.NonLettersE1.Add("′");
         this.NonLettersE1.Add("″");
-
     }
 
     public static LatinChars Load()
