@@ -1,8 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <PackageId>flxbe.Din91379</PackageId>
-    <Title>Din91379</Title>
+    <PackageId>Din91379</PackageId>
     <Version>0.1.0</Version>
     <Authors>Felix Bernhardt</Authors>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>

@@ -20,6 +20,12 @@ A C# implementation of [DIN 91379:2022-08](https://www.beuth.de/de/norm/din-9137
 - **Tested**: The implementation is fully tested against the complete `latinchars.xml` dataset as attached in
   DIN SPEC 91379:2019-03, extended by the newly introduced characters in DIN 91379:2022-08.
 
+# Getting Started
+
+```bash
+dotnet add package Din91379 --version 0.1.0
+```
+
 ## License
 
 MIT License
