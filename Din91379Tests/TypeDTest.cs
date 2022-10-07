@@ -50,13 +50,15 @@ public class TypeDTest
     }
 
     [Theory]
-    [MemberData(nameof(NotConvertibleTestData))]
+    [MemberData(nameof(InvalidGlyphsTestData))]
     public void TestRejectsNotConvertibleGlyphs(string glyph)
     {
         Assert.Throws<InvalidGlyphException>(() => TypeD.FromString(glyph));
+
+        Assert.False(TypeD.IsValid(glyph));
     }
 
-    public static IEnumerable<object[]> NotConvertibleTestData()
+    public static IEnumerable<object[]> InvalidGlyphsTestData()
     {
         foreach (string glyph in TestData.GloballyInvalidStrings)
         {
@@ -69,26 +71,6 @@ public class TypeDTest
         }
 
         foreach (string glyph in TestData.Groups.CyrillicLetters)
-        {
-            yield return new object[] { glyph };
-        }
-    }
-
-    [Theory]
-    [MemberData(nameof(InvalidGlyphsTestData))]
-    public void TestRejectsInvalidGlyphs(string glyph)
-    {
-        Assert.False(TypeD.IsValid(glyph));
-    }
-
-    public static IEnumerable<object[]> InvalidGlyphsTestData()
-    {
-        foreach (object[] data in NotConvertibleTestData())
-        {
-            yield return data;
-        }
-
-        foreach (string glyph in TestData.DeprecatedLatinLetters.Keys)
         {
             yield return new object[] { glyph };
         }

@@ -654,6 +654,12 @@ namespace Din91379
             {"Ụ̈", "UE"},
             {"ụ̄", "U"},
             {"ụ̈", "UE"},
+            {"Ŀ", "L"}, // deprecated
+            {"ŀ", "L"}, // deprecated
+            {"ē̍", "E"}, // deprecated
+            {"ḗ", "E"}, // deprecated
+            {"ō̍", "O"}, // deprecated
+            {"ŉ", "N"}, // deprecated
         };
 
         public static readonly string[] NonLettersN1 = {
@@ -950,15 +956,6 @@ namespace Din91379
             "∞",
             "≤",
             "≥",
-        };
-
-        public static readonly Dictionary<string, string> DeprecatedLatinLetters = new Dictionary<string, string> {
-            {"ē̍", "ī́"},
-            {"Ŀ", "L·"},
-            {"ŀ", "l·"},
-            {"ŉ", "'n"},
-            {"ō̍", "ṓ"},
-            {"ḗ", "ī́"},
         };
 
         public static IEnumerable<string> GetGlyphEnumerator(string value)

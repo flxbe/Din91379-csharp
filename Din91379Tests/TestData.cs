@@ -13,12 +13,12 @@ class TestData
         "k͟u",
     };
 
-    public static readonly Dictionary<string, string> DeprecatedLatinLetters = new Dictionary<string, string> {
-        {"ē̍", "ī́"},
-        {"Ŀ", "L·"},
-        {"ŀ", "l·"},
-        {"ŉ", "'n"},
-        {"ō̍", "ṓ"},
-        {"ḗ", "ī́"},
-    };
+    //public static readonly Dictionary<string, string> DeprecatedLatinLetters = new Dictionary<string, string> {
+    //{"ē̍", "ī́"},
+    //{"Ŀ", "L·"},
+    //{"ŀ", "l·"},
+    //{"ŉ", "'n"},
+    //{"ō̍", "ṓ"},
+    //{"ḗ", "ī́"},
+    //};
 }

@@ -51,27 +51,13 @@ namespace Din91379
         {
             value = value.Normalize();
 
-            StringBuilder builder = new StringBuilder(value.Length);
-            foreach (string glyph in Glyphs.GetGlyphEnumerator(value))
+            string? invalidGlyph = _GetFirstInvalidGlyph(value, validGlyphs);
+            if (invalidGlyph != null)
             {
-                if (validGlyphs.Contains(glyph))
-                {
-                    builder.Append(glyph);
-                }
-                else if (Glyphs.DeprecatedLatinLetters.ContainsKey(glyph))
-                {
-                    // Translation of deprecated latin letters are valid for each data type,
-                    // so this implicitly validates the translation.
-                    // No extra test against the validGlyphs set is required.
-                    builder.Append(Glyphs.DeprecatedLatinLetters[glyph]);
-                }
-                else
-                {
-                    throw new InvalidGlyphException(value, glyph);
-                }
+                throw new InvalidGlyphException(value, invalidGlyph);
             }
 
-            return builder.ToString();
+            return value;
         }
 
         protected static string? _GetFirstInvalidGlyph(string value, HashSet<string> validGlyphs)

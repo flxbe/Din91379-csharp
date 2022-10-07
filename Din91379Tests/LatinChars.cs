@@ -4,23 +4,16 @@ using System.Text;
 namespace Din91379Tests;
 
 
-
-
 class LatinChars
 {
-    // Do not load deprecated samples, as the mapping of those characters
-    // to the search form breaks during conversion to their respective
-    // replacements.
-    private static readonly string[] ExcludedSamples = { "Ŀ", "ŉ", "ŀ" };
-
     public readonly Dictionary<string, string> LatinLetters;
     public readonly Dictionary<string, string> NonLettersN1;
     public readonly Dictionary<string, string> NonLettersN2;
     public readonly Dictionary<string, string> NonLettersN3;
     public readonly Dictionary<string, string> NonLettersN4;
-    public readonly HashSet<string> GreekLetters;
-    public readonly HashSet<string> CyrillicLetters;
-    public readonly HashSet<string> NonLettersE1;
+    public readonly List<string> GreekLetters;
+    public readonly List<string> CyrillicLetters;
+    public readonly List<string> NonLettersE1;
 
     private LatinChars(XmlDocument doc)
     {
@@ -29,9 +22,9 @@ class LatinChars
         this.NonLettersN2 = new Dictionary<string, string>();
         this.NonLettersN3 = new Dictionary<string, string>();
         this.NonLettersN4 = new Dictionary<string, string>();
-        this.GreekLetters = new HashSet<string>();
-        this.CyrillicLetters = new HashSet<string>();
-        this.NonLettersE1 = new HashSet<string>();
+        this.GreekLetters = new List<string>();
+        this.CyrillicLetters = new List<string>();
+        this.NonLettersE1 = new List<string>();
 
         foreach (XmlNode node in doc.GetElementsByTagName("char"))
         {
@@ -44,7 +37,7 @@ class LatinChars
         }
 
         // Check, that all glyphs have been loaded
-        _CheckGlyphCount(this.LatinLetters.Count, 646 - ExcludedSamples.GetLength(0));
+        _CheckGlyphCount(this.LatinLetters.Count, 646);
         _CheckGlyphCount(this.NonLettersN1.Count, 18);
         _CheckGlyphCount(this.NonLettersN2.Count, 60);
         _CheckGlyphCount(this.NonLettersN3.Count, 6);
@@ -53,9 +46,13 @@ class LatinChars
         _CheckGlyphCount(this.CyrillicLetters.Count, 62);
         _CheckGlyphCount(this.NonLettersE1.Count, 40);
 
-        // Add new, non-deprecated NonLetterE1 glyphs
+        // Add new letters introduced between DIN SPEC 91379 and DIN 91379
+        this.LatinLetters.Add("ē̍", "E");
+        this.LatinLetters.Add("ḗ", "E");
+        this.LatinLetters.Add("ō̍", "O");
         this.NonLettersE1.Add("′");
         this.NonLettersE1.Add("″");
+
     }
 
     public static LatinChars Load()
@@ -69,11 +66,6 @@ class LatinChars
     private void ImportNode(XmlNode node)
     {
         CharacterInfo info = CharacterInfo.Parse(node);
-
-        if (ExcludedSamples.Contains(info.Glyph))
-        {
-            return;
-        }
 
         switch (info.Group)
         {
@@ -107,7 +99,6 @@ class LatinChars
                 throw new Exception("Invalid group");
         }
     }
-
 
     private static void _CheckGlyphCount(int actual, int expected)
     {

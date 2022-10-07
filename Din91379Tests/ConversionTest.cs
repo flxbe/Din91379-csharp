@@ -6,55 +6,7 @@ using Din91379;
 public class ConversionTest
 {
     [Theory]
-    [MemberData(nameof(DeprecatedGlyphsTestData))]
-    public void TestTypeAConversion(string glyph, string replacement)
-    {
-        TypeA value = TypeA.FromString(glyph);
-        Assert.Equal(value, replacement);
-    }
-
-    [Theory]
-    [MemberData(nameof(DeprecatedGlyphsTestData))]
-    public void TestTypeBConversion(string glyph, string replacement)
-    {
-        TypeB value = TypeB.FromString(glyph);
-        Assert.Equal(value, replacement);
-    }
-
-    [Theory]
-    [MemberData(nameof(DeprecatedGlyphsTestData))]
-    public void TestTypeCConversion(string glyph, string replacement)
-    {
-        TypeC value = TypeC.FromString(glyph);
-        Assert.Equal(value, replacement);
-    }
-
-    [Theory]
-    [MemberData(nameof(DeprecatedGlyphsTestData))]
-    public void TestTypeDConversion(string glyph, string replacement)
-    {
-        TypeD value = TypeD.FromString(glyph);
-        Assert.Equal(value, replacement);
-    }
-
-    [Theory]
-    [MemberData(nameof(DeprecatedGlyphsTestData))]
-    public void TestTypeEConversion(string glyph, string replacement)
-    {
-        TypeE value = TypeE.FromString(glyph);
-        Assert.Equal(value, replacement);
-    }
-
-    public static IEnumerable<object[]> DeprecatedGlyphsTestData()
-    {
-        foreach (KeyValuePair<string, string> item in TestData.DeprecatedLatinLetters)
-        {
-            yield return new object[] { item.Key, item.Value };
-        }
-    }
-
-    [Theory]
-    [MemberData(nameof(DeprecatedGlyphsTestData))]
+    [MemberData(nameof(NonNfcTestData))]
     public void TestTypeANormalization(string nonNormalized, string normalized)
     {
         Assert.False(TypeA.IsValid(nonNormalized));
@@ -64,7 +16,7 @@ public class ConversionTest
     }
 
     [Theory]
-    [MemberData(nameof(DeprecatedGlyphsTestData))]
+    [MemberData(nameof(NonNfcTestData))]
     public void TestTypeBNormalization(string nonNormalized, string normalized)
     {
         Assert.False(TypeB.IsValid(nonNormalized));
@@ -74,7 +26,7 @@ public class ConversionTest
     }
 
     [Theory]
-    [MemberData(nameof(DeprecatedGlyphsTestData))]
+    [MemberData(nameof(NonNfcTestData))]
     public void TestTypeCNormalization(string nonNormalized, string normalized)
     {
         Assert.False(TypeC.IsValid(nonNormalized));
@@ -84,7 +36,7 @@ public class ConversionTest
     }
 
     [Theory]
-    [MemberData(nameof(DeprecatedGlyphsTestData))]
+    [MemberData(nameof(NonNfcTestData))]
     public void TestTypeDNormalization(string nonNormalized, string normalized)
     {
         Assert.False(TypeD.IsValid(nonNormalized));
@@ -94,7 +46,7 @@ public class ConversionTest
     }
 
     [Theory]
-    [MemberData(nameof(DeprecatedGlyphsTestData))]
+    [MemberData(nameof(NonNfcTestData))]
     public void TestTypeENormalization(string nonNormalized, string normalized)
     {
         Assert.False(TypeE.IsValid(nonNormalized));

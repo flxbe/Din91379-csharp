@@ -60,35 +60,17 @@ public class TypeETest
     }
 
     [Theory]
-    [MemberData(nameof(NotConvertibleTestData))]
-    public void TestRejectsNotConvertibleGlyphs(string glyph)
-    {
-        Assert.Throws<InvalidGlyphException>(() => TypeE.FromString(glyph));
-    }
-
-    public static IEnumerable<object[]> NotConvertibleTestData()
-    {
-        foreach (string glyph in TestData.GloballyInvalidStrings)
-        {
-            yield return new object[] { glyph };
-        }
-    }
-
-    [Theory]
     [MemberData(nameof(InvalidGlyphsTestData))]
     public void TestRejectsInvalidGlyphs(string glyph)
     {
+        Assert.Throws<InvalidGlyphException>(() => TypeE.FromString(glyph));
+
         Assert.False(TypeE.IsValid(glyph));
     }
 
     public static IEnumerable<object[]> InvalidGlyphsTestData()
     {
-        foreach (object[] data in NotConvertibleTestData())
-        {
-            yield return data;
-        }
-
-        foreach (string glyph in TestData.DeprecatedLatinLetters.Keys)
+        foreach (string glyph in TestData.GloballyInvalidStrings)
         {
             yield return new object[] { glyph };
         }
