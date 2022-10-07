@@ -44,7 +44,7 @@ Using invalid characters will throw an error.
 TypeA.FromString("Karl-Bröger Straße 17");
 ```
 
-The search form of a string can be derived to the data types `TypeA`, `TypeB` and `TypeC`.
+The search form of a string can be derived for the data types `TypeA`, `TypeB` and `TypeC`.
 
 ```csharp
 TypeA variant1 = TypeA.FromString("Nœl Schmidt-Strauß");
