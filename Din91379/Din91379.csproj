@@ -1,8 +1,20 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <PackageId>flxbe.Din91379</PackageId>
+    <Title>Din91379</Title>
+    <Version>0.1.0</Version>
+    <Authors>Felix Bernhardt</Authors>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <RepositoryUrl>https://github.com/flxbe/Din91379-csharp</RepositoryUrl>
+
     <TargetFramework>net5.0</TargetFramework>
     <Nullable>enable</Nullable>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="../README.md" Pack="true" PackagePath="/"/>
+  </ItemGroup>
 
 </Project>
