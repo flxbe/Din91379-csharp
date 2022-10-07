@@ -20,10 +20,38 @@ A C# implementation of [DIN 91379:2022-08](https://www.beuth.de/de/norm/din-9137
 - **Tested**: The implementation is fully tested against the complete `latinchars.xml` dataset as attached in
   DIN SPEC 91379:2019-03, extended by the newly introduced characters in DIN 91379:2022-08.
 
-# Getting Started
+## Getting Started
+
+The library is available as a [NuGet package](https://www.nuget.org/packages/Din91379/).
 
 ```bash
-dotnet add package Din91379 --version 0.1.0
+dotnet add package Din91379
+```
+
+Instances of the provided data types can be easily generated from `string` values.
+
+```csharp
+using Din91379;
+
+TypeA name = TypeA.FromString("Nœl Schmidt-Strauß");
+TypeB streetName = TypeB.FromString("Karl-Bröger Straße 17");
+```
+
+Using invalid characters will throw an error.
+
+```csharp
+// Din91379.InvalidGlyphException: Found invalid glyph '1' in 'Karl-Bröger Straße 17'
+TypeA.FromString("Karl-Bröger Straße 17");
+```
+
+The search form of a string can be derived to the data types `TypeA`, `TypeB` and `TypeC`.
+
+```csharp
+TypeA variant1 = TypeA.FromString("Nœl Schmidt-Strauß");
+TypeA variant2 = TypeA.FromString("Noël Schmidt-Strauß");
+
+Console.WriteLine(variant1); // Output: NOEL SCHMIDT-STRAUSS
+Console.WriteLine(variant2); // Output: NOEL SCHMIDT-STRAUSS
 ```
 
 ## License
