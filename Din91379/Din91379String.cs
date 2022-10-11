@@ -78,6 +78,19 @@ namespace Din91379
             return _GetFirstInvalidGlyph(value, validGlyphs) == null;
         }
 
+        public bool IsDinSpec91379Compatible()
+        {
+            foreach (string glyph in Glyphs.GetGlyphEnumerator(value))
+            {
+                if (Glyphs.NewGlyphs.Contains(glyph))
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
         public int CompareTo(Din91379String? other)
         {
             if (other is null)
@@ -89,6 +102,7 @@ namespace Din91379
                 return this.value.CompareTo(other.value);
             }
         }
+
         public int CompareTo(string? other)
         {
             return this.value.CompareTo(other);

@@ -55,6 +55,18 @@ Console.WriteLine(variant1); // Output: NOEL SCHMIDT-STRAUSS
 Console.WriteLine(variant2); // Output: NOEL SCHMIDT-STRAUSS
 ```
 
+### Compatibility with DIN SPEC 91379
+
+DIN 91379:2022-08 added a few new characters which are not specified in
+[DIN SPEC 91379:2019-03](https://www.beuth.de/de/technische-regel/din-spec-91379/301228458).
+The compatibility of a specific value with the replaced standard can be easily checked.
+
+```csharp
+TypeA value = TypeA.FromString("Hē̍llō̍");
+
+Console.WriteLine(value.IsDinSpec91379Compatible()); // Output: False
+```
+
 ## License
 
 MIT License

@@ -958,6 +958,14 @@ namespace Din91379
             "≥",
         };
 
+        public static readonly List<string> NewGlyphs = new List<string> {
+            "ē̍",
+            "ō̍",
+            "ḗ",
+            "′",
+            "″",
+        };
+
         public static IEnumerable<string> GetGlyphEnumerator(string value)
         {
             TextElementEnumerator glyphEnumerator = StringInfo.GetTextElementEnumerator(value);
