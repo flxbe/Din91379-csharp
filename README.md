@@ -2,6 +2,7 @@
 
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/flxbe/Din91379/blob/main/LICENSE)
 [![ci](https://github.com/flxbe/Din91379/actions/workflows/CI.yml/badge.svg)](https://github.com/flxbe/Din91379/actions/workflows/CI.yml)
+[![nuget](https://img.shields.io/nuget/v/Din91379)](https://www.nuget.org/packages/Din91379)
 
 A C# implementation of [DIN 91379:2022-08](https://www.beuth.de/de/norm/din-91379/353496133), the replacement of
 [DIN SPEC 91379:2019-03](https://www.beuth.de/de/technische-regel/din-spec-91379/301228458)
