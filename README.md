@@ -12,12 +12,9 @@ A C# implementation of [DIN 91379:2022-08](https://www.beuth.de/de/norm/din-9137
 - **Strict**: All data types are Unicode NFC normalized and contain only
   characters and sequences from DIN 91379. Any string containing invalid
   glyphs is rejected.
-
 - **Easy to use**: The data types have a familiar `string`-like interface. Normalization to Unicode NFC is done automatically.
   The data types `TypeA`, `TypeB` and `TypeC` support the conversion to the canonical search form.
-
 - **Efficient**: The custom validation algorithm is **up to 4x faster** than using compiled regular expressions.
-
 - **Tested**: The implementation is fully tested against the complete `latinchars.xml` dataset as attached in
   DIN SPEC 91379:2019-03, extended by the newly introduced characters in DIN 91379:2022-08.
 
