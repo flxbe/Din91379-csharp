@@ -25,7 +25,7 @@ namespace Din91379
     }
 
     public abstract class Din91379String : IComparable<Din91379String>, IComparable<string>,
-        IEnumerable<char>, IEnumerable, IEquatable<string>, IEquatable<Din91379String>
+        IEnumerable<char>, IEnumerable, IEquatable<string?>, IEquatable<Din91379String>
     {
         private static readonly Dictionary<string, string> TransliterationTable = Glyphs.CreateTransliterationTable();
 
@@ -34,6 +34,22 @@ namespace Din91379
         protected Din91379String(string value)
         {
             this.value = value;
+        }
+
+        public char this[int index]
+        {
+            get
+            {
+                return this.value[index];
+            }
+        }
+
+        public int Length
+        {
+            get
+            {
+                return this.value.Length;
+            }
         }
 
         protected string _GetSearchForm()
