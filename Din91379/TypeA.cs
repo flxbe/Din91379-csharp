@@ -34,7 +34,6 @@ namespace Din91379
             return _GetFirstInvalidGlyph(value, ValidGlyphs);
         }
 
-
         public static TypeA operator +(TypeA left, TypeA right)
         {
             return new TypeA(left.value + right.value);

@@ -36,5 +36,10 @@ namespace Din91379
         {
             return _GetFirstInvalidGlyph(value, ValidGlyphs);
         }
+
+        public static TypeC operator +(TypeC left, TypeC right)
+        {
+            return new TypeC(left.value + right.value);
+        }
     }
 }

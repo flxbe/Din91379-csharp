@@ -32,5 +32,10 @@ namespace Din91379
         {
             return _GetFirstInvalidGlyph(value, ValidGlyphs);
         }
+
+        public static TypeD operator +(TypeD left, TypeD right)
+        {
+            return new TypeD(left.value + right.value);
+        }
     }
 }
