@@ -48,8 +48,8 @@ The search form of a string can be derived for the data types `TypeA`, `TypeB` a
 TypeA variant1 = TypeA.FromString("Nœl Schmidt-Strauß");
 TypeA variant2 = TypeA.FromString("Noël Schmidt-Strauß");
 
-Console.WriteLine(variant1); // Output: NOEL SCHMIDT-STRAUSS
-Console.WriteLine(variant2); // Output: NOEL SCHMIDT-STRAUSS
+Console.WriteLine(variant1.GetSearchForm()); // Output: NOEL SCHMIDT-STRAUSS
+Console.WriteLine(variant2.GetSearchForm()); // Output: NOEL SCHMIDT-STRAUSS
 ```
 
 ### Compatibility with DIN SPEC 91379
